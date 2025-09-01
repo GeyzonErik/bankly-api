@@ -31,8 +31,8 @@ export class AccountsController {
       }
 
       const balance = await this.getBalanceUseCase.execute(accountId);
-      
-      res.status(201).send(balance);
+
+      res.status(200).send(balance);
     } catch (err) {
       if (err instanceof AccountNotFoundError) {
         res.status(404).send(0);
@@ -46,7 +46,7 @@ export class AccountsController {
   async reset(req: Request, res: Response) {
     try {
       await this.resetAccounts();
-      res.status(200).send();
+      res.status(200).send('OK');
     } catch (err) {
       res.status(500).send({ error: "Internal server error" });
     }
