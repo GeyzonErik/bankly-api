@@ -17,7 +17,7 @@ export class EventsController {
 
       const result = await this.processEventUseCase.execute(event);
 
-      res.status(200).json(result);
+      res.status(201).json(result);
     } catch (err) {
       if (err instanceof AccountNotFoundError) {
         res.status(404).json(0);

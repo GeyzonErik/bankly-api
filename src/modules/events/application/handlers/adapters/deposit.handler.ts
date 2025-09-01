@@ -10,6 +10,14 @@ export class DepoistHandler implements IEventHandler<DepositEvent> {
   async handle(event: DepositEvent): Promise<HandlerResult> {
     const { destination, amount } = event;
 
+    if (amount <= 0) {
+      throw new Error("Deposit amount must be positive");
+    }
+
+    if (typeof amount !== "number") {
+      throw new Error("Deposit amount must be a number");
+    }
+
     let account = await this.accountRepository.findById(destination);
 
     if (!account) {
